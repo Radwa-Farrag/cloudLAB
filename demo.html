@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: black;
+        }
+
+        #container {
+            padding-block: 100px;
+            display: flex;
+           /* display: grid;*/
+           flex-direction: row;
+            grid-template-columns: auto auto auto;
+            /* margin-inline: 300px; */
+        }
+        #container2 {
+            display: flex;
+           /* display: grid;*/
+           flex-direction: row;
+            grid-template-columns: auto auto auto;
+            margin-inline: 300px;
+        }
+        .item {
+            border: 1px solid white;
+            color: black;
+            background-color: white;
+            border-radius: 5px;
+            font-size: 30px;
+            padding: 15px;
+            margin: 10px;
+            width: 300px;
+            font-size: larger;
+        }
+       
+        img {
+            width: 100%;
+            display: block;
+        }
+        button{
+            
+            /* align-self: flex-end; */
+            /* margin-inline: 50px;
+            margin-block: 10px; */
+            background-color: white;
+            border: 0 white;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+
+    </div>
+    <div id="container2">
+
+    </div>
+    <script>
+        window.addEventListener("load", function () {
+            //  console.log("fired");
+            var xhr = new XMLHttpRequest()
+            xhr.open("GET", "https://fakestoreapi.com/products")
+            xhr.send()
+            xhr.addEventListener("readystatechange", function () {
+                if (xhr.readyState == 4) {
+                    // console.log(xhr.response);
+                    var responseJSON = xhr.response
+                    var response = JSON.parse(responseJSON)
+                    //    console.log(response);
+                    var divcontainer = document.getElementById("container")
+                    for (var prod of response) {
+                        var name = prod.title
+                        var price = prod.price
+                        var img = prod.image
+                        var name = prod.title
+                        var p = document.createElement("p")
+
+
+                        p.innerHTML = "<img src=" + img + ">" + name + "<br>" + price
+                        p.setAttribute("class", "item")
+                        divcontainer.appendChild(p)
+
+
+
+
+
+                    }
+
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>
